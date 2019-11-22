@@ -4,27 +4,33 @@ from django.db import models
 
 class Produto(models.Model):
     opcoes_tamanho = [
-        ('PP', 'Extra pequeno')
+        ('PP', 'Extra pequeno'),
         ('P', 'Pequeno'),
         ('M', 'Médio'),
         ('G', 'Grande'),
-        ('GG', 'Extra grande'),
+        ('GG', 'Extra grande')
     ]
 
-    nome = models.CharField(max_lenght=50)
+    nome = models.CharField(max_length=50)
     preco = models.DecimalField(decimal_places=2, max_digits=1000, default=50)
     disponivel = models.BooleanField(default=True)
     quantidade = models.IntegerField(default=1)
-    tamanho = model.CharField(max_lenght=2, choices=opcoes_tamanho)
+    tamanho = models.CharField(max_length=2, choices=opcoes_tamanho)
+
+    def __str__(self):
+        return self.nome
 
 class Pedido(models.Model):
     metodo_pagamento = [
-        ('AV', 'Pagamento à vista')
-        ('P2', 'Parcelado em 2x')
+        ('AV', 'Pagamento à vista'),
+        ('P2', 'Parcelado em 2x'),
         ('P3', 'Parcelado em 3x')
     ]
 
-    nome = models.CharField(max_lenght=140)
+    nome = models.CharField(max_length=140)
     email = models.EmailField()
     cartao = models.IntegerField()
-    pagamento = models.CharField(max_lenght=2, choices=metodo_pagamento)
+    pagamento = models.CharField(max_length=2, choices=metodo_pagamento)
+
+    def __str__(self):
+        return self.nome
