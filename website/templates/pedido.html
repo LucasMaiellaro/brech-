@@ -3,8 +3,17 @@
 
 {% block content %}
     <h1>Faça o seu pedido</h1>
+
+    {% if formulario %}
     <form method="POST">
+        {% csrf_token %}
         {{formulario}}
         <button type="submit">Enviar pedido</button>
     </form>
+    {% endif %}
+   
+    {% if msg %}
+        <h2>{{msg}}</h2>
+    {% endif %}
+
 {% endblock %}
